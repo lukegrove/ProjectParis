@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 501047294}
   - component: {fileID: 501047298}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,6 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567e23243b8c9ee4890a04cbea6ca1d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Target
+  target: {fileID: 501047293}
   health: 10
 --- !u!1 &604789865
 GameObject:
@@ -887,6 +888,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 410087041}
   - {fileID: 832575519}
+  - {fileID: 501047297}
   - {fileID: 604789870}
   - {fileID: 455781709}
-  - {fileID: 501047297}
