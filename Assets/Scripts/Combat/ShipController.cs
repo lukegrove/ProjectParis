@@ -19,4 +19,9 @@ public class ShipController : MonoBehaviour
     {
         Ship.SetMoveTarget(destination);
     }
+
+    public float GetFormationOffset()
+    {
+        return Ship.FormationOffset;
+    }
 }
