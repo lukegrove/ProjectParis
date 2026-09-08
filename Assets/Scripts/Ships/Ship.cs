@@ -8,9 +8,11 @@ namespace Perseus.Ships
         public float Acceleration { get; private set; } = 2f;
         public float TurnSpeed { get; private set; } = 4f;
         public float Hull { get; private set; } = 100f;
-        public float Speed { get; set; }
+        public float Speed { get; set; } // TODO Make private, create a setter method
         public Vector3 MoveTarget { get; private set; }
         public bool HasMoveTarget { get; private set; }
+        public float FormationOffset { get; private set; } = 2f;
+        public float SafetyOffset { get; private set; } = 2f;
 
         public void SetMoveTarget(Vector3 destination)
         {

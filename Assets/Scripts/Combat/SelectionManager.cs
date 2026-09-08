@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
 {
-    public List<ShipController> selectedShips = new();
+    public List<ShipController> SelectedShips = new();
 
     public void SelectShip(ShipController ship)
     {
-        if (!selectedShips.Contains(ship))
+        if (!SelectedShips.Contains(ship))
         {
-            selectedShips.Add(ship);
+            SelectedShips.Add(ship);
         }
     }
 
     public void UnselectAllShips()
     {
-        selectedShips.Clear();
+        SelectedShips.Clear();
     }
 
     public bool IsEmpty()
     {
-        return selectedShips.Count == 0;
+        return SelectedShips.Count == 0;
     }
 }

@@ -129,8 +129,10 @@ GameObject:
   m_Component:
   - component: {fileID: 83909732}
   - component: {fileID: 83909731}
+  - component: {fileID: 83909734}
+  - component: {fileID: 83909733}
   m_Layer: 0
-  m_Name: InputManager
+  m_Name: PlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,8 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104452dbecd4a9c48aa8a35a88c6c282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  fleetController: {fileID: 1876583098}
-  selectionManager: {fileID: 782950564}
   CombatPlane:
     serializedVersion: 2
     m_Bits: 128
@@ -171,6 +171,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &83909733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83909730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e30928f78b2994b8c2d0fa7e5b6628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FleetController
+  CombatPlane:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &83909734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83909730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1764209e23e4cc4e8c8f07c35978927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
+  SelectedShips: []
 --- !u!1 &709912863
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,51 +339,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   moveSpeed: 20
---- !u!1 &782950563
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 782950565}
-  - component: {fileID: 782950564}
-  m_Layer: 0
-  m_Name: SelectionManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &782950564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782950563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1764209e23e4cc4e8c8f07c35978927, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
-  selectedShips: []
---- !u!4 &782950565
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782950563}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.40586, y: -0, z: 4.94991}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &929034143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -364,6 +347,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2499801621512963814, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
+      propertyPath: ShipLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 6023159376172904211, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
       propertyPath: m_Name
       value: TestShip (1)
@@ -548,6 +535,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2499801621512963814, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
+      propertyPath: ShipLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 6023159376172904211, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
       propertyPath: m_Name
       value: TestShip
@@ -597,54 +588,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
---- !u!1 &1876583097
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1876583099}
-  - component: {fileID: 1876583098}
-  m_Layer: 0
-  m_Name: FleetController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1876583098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876583097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4e30928f78b2994b8c2d0fa7e5b6628, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FleetController
-  selectionManager: {fileID: 782950564}
-  CombatPlane:
-    serializedVersion: 2
-    m_Bits: 128
---- !u!4 &1876583099
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876583097}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.40586, y: -0, z: 4.94991}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2030809674
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,8 +859,6 @@ SceneRoots:
   - {fileID: 2030809676}
   - {fileID: 745939428}
   - {fileID: 83909732}
-  - {fileID: 782950565}
-  - {fileID: 1876583099}
   - {fileID: 1491621801}
   - {fileID: 929034143}
   - {fileID: 952043822}

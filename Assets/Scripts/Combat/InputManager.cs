@@ -19,18 +19,29 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current == null)
         {
-            UpdateShipSelection();
+            return;
         }
 
-        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
+        var keyboard = Keyboard.current;
+
+        if (keyboard.leftShiftKey.isPressed && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            UpdateShipSelection(true);
+        }
+        else if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            UpdateShipSelection(false);
+        }
+
+        if (Mouse.current.rightButton.wasPressedThisFrame)
         {
             UpdateFleetOrders();
         }
     }
 
-    public void UpdateShipSelection()
+    public void UpdateShipSelection(bool multiSelect)
     {
         Ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
@@ -40,6 +51,11 @@ public class InputManager : MonoBehaviour
             
             if (ship != null)
             {
+                if (!multiSelect)
+                {
+                    SelectionManager.UnselectAllShips();
+                }
+
                 SelectionManager.SelectShip(ship);
             }
         }
