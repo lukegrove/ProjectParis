@@ -1,37 +1,54 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Perseus.Ships
 {
     public class ShipMovement : MonoBehaviour
     {
-        private Ship ship;
-        public LayerMask CombatPlane;
+        private Ship Ship;
 
-        private void Start()
+        public void Initialize(Ship shipState)
         {
-            ship = new Ship();
+            Ship = shipState;
         }
 
         private void Update()
         {
-            if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-                LayerMask mask = CombatPlane.value == 0 ? ~0 : CombatPlane;
+            MoveToTarget();
+        }
 
-                if (Physics.Raycast(ray, out RaycastHit hit, 1000f, mask, QueryTriggerInteraction.Ignore))
-                {
-                    Vector3 moveTarget = hit.point;
-                    moveTarget.y = transform.position.y;
-                    ship.SetMoveTarget(moveTarget);
-                }
+        public void MoveToTarget()
+        {
+            if (Ship != null && Ship.HasMoveTarget)
+            {
+                UpdateMovement(transform, Time.deltaTime);
+            }
+        }
+
+        public void UpdateMovement(Transform shipTransform, float deltaTime)
+        {
+            if (!Ship.HasMoveTarget)
+            {
+                return;
             }
 
-            if (ship.HasMoveTarget)
+            Vector3 directionToTarget = Ship.MoveTarget - shipTransform.position;
+            directionToTarget.y = 0f;
+            float distance = directionToTarget.magnitude;
+
+            if (directionToTarget.sqrMagnitude > 0.0001f)
             {
-                ship.UpdateMovement(transform, Time.deltaTime);
+                Quaternion targetRotation = Quaternion.LookRotation(directionToTarget.normalized, Vector3.up);
+                shipTransform.rotation = Quaternion.Slerp(shipTransform.rotation, targetRotation, deltaTime * Ship.TurnSpeed);
             }
+
+            Ship.Speed = Mathf.MoveTowards(Ship.Speed, Ship.MaxSpeed, Ship.Acceleration * deltaTime);
+
+            float step = Ship.Speed * deltaTime;
+            float clampedStep = Mathf.Min(step, distance);
+
+            Vector3 nextPosition = Vector3.MoveTowards(shipTransform.position, Ship.MoveTarget, clampedStep);
+            nextPosition.y = shipTransform.position.y;
+            shipTransform.position = nextPosition;
         }
     }
 }
