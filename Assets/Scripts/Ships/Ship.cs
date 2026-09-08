@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 namespace Perseus.Ships
@@ -9,7 +8,7 @@ namespace Perseus.Ships
         public float Acceleration { get; private set; } = 2f;
         public float TurnSpeed { get; private set; } = 4f;
         public float Hull { get; private set; } = 100f;
-        public float Speed { get; private set; }
+        public float Speed { get; set; }
         public Vector3 MoveTarget { get; private set; }
         public bool HasMoveTarget { get; private set; }
 
@@ -30,33 +29,6 @@ namespace Perseus.Ships
             Speed = 0f;
             HasMoveTarget = false;
             MoveTarget = Vector3.zero;
-        }
-
-        public void UpdateMovement(Transform shipTransform, float deltaTime)
-        {
-            if (!HasMoveTarget)
-            {
-                return;
-            }
-
-            Vector3 directionToTarget = MoveTarget - shipTransform.position;
-            directionToTarget.y = 0f;
-            float distance = directionToTarget.magnitude;
-
-            if (directionToTarget.sqrMagnitude > 0.0001f)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(directionToTarget.normalized, Vector3.up);
-                shipTransform.rotation = Quaternion.Slerp(shipTransform.rotation, targetRotation, deltaTime * TurnSpeed);
-            }
-
-            Speed = Mathf.MoveTowards(Speed, MaxSpeed, Acceleration * deltaTime);
-
-            float step = Speed * deltaTime;
-            float clampedStep = Mathf.Min(step, distance);
-
-            Vector3 nextPosition = Vector3.MoveTowards(shipTransform.position, MoveTarget, clampedStep);
-            nextPosition.y = shipTransform.position.y;
-            shipTransform.position = nextPosition;
         }
 
         public void TakeDamage(float damage)
