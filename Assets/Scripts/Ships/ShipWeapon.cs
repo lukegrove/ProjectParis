@@ -10,6 +10,7 @@ namespace Perseus.Ships
         public float range = 5f;
         public float fireRate = 1f;
         public float cooldown = 0;
+        public float damage = 1;
 
         private Ship Ship;
 
@@ -30,23 +31,28 @@ namespace Perseus.Ships
             }
         }
 
-        public IInteractable DetectShipsInRange()
+        public ShipController DetectShipsInRange(Faction EnemyFaction)
         {
             Collider[] enemyTargets = Physics.OverlapSphere(transform.position, range, TargetLayer);
             
             foreach (var target in enemyTargets)
             {
-                return target.GetComponent<IInteractable>();
+                ShipController shipController = target.GetComponentInParent<ShipController>();
+
+                if (shipController != null && shipController.GetFaction() == EnemyFaction)
+                {
+                    return shipController;
+                }
             }
 
             return null;
         }
 
-        public bool FireAtTarget(IInteractable target)
+        public bool FireAtTarget(ShipController target)
         {
             if (target != null && cooldown == 0)
             {
-                target.Interact();
+                target.TakeDamage(damage);
                 cooldown = 1 / fireRate;
                 return true;
             }
