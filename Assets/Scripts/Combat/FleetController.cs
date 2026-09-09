@@ -33,7 +33,7 @@ public class FleetController : MonoBehaviour
                 Vector3 offset = new Vector3(xOffset, 0, zOffset) * ship.GetFormationOffset();
                 Vector3 offsetDestination = destination + offset;
 
-                Debug.Log($"{ship.name} target: {offsetDestination}");
+                //Debug.Log($"{ship.name} target: {offsetDestination}");
                 ship.OrderShipToTarget(offsetDestination);
             }
         }

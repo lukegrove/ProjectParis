@@ -124,6 +124,9 @@ GameObject:
   - component: {fileID: 7800232677226238140}
   - component: {fileID: 2499801621512963814}
   - component: {fileID: 5202297622490490662}
+  - component: {fileID: 3687741112386483264}
+  - component: {fileID: 4030301231629135032}
+  - component: {fileID: 5205095008852313574}
   m_Layer: 8
   m_Name: TestShip
   m_TagString: Untagged
@@ -140,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 6023159376172904211}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.562, z: -0.000015258789}
+  m_LocalPosition: {x: 3.4064832, y: 0.5000001, z: 3.244136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -171,6 +174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb86774d569d7dd41a79c1de076fafd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Perseus.Ships.ShipMovement
+  AvoidanceRadius: 2
+  AvoidanceStrength: 2
+  ShipLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  StoppingDistance: 0.2
 --- !u!114 &5202297622490490662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,3 +198,45 @@ MonoBehaviour:
   range: 10
   fireRate: 1
   cooldown: 0
+--- !u!114 &3687741112386483264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023159376172904211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b5617ed9efaa34ba9c9eb8850aa057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Perseus.Ships.ShipScanner
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &4030301231629135032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023159376172904211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b5617ed9efaa34ba9c9eb8850aa057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Perseus.Ships.ShipScanner
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &5205095008852313574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023159376172904211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a286bb2bae2b5a4db01d92b72114fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipCombatAI
