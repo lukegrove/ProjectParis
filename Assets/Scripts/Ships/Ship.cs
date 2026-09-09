@@ -2,24 +2,17 @@ using UnityEngine;
 
 namespace Perseus.Ships
 {
-    public enum Faction
-    {
-        Faction1,
-        Faction2
-    }
-
     public class Ship
     {
         public float MaxSpeed { get; private set; } = 5f;
         public float Acceleration { get; private set; } = 2f;
         public float TurnSpeed { get; private set; } = 4f;
-        public float Hull { get; private set; } = 100f;
+        public float Hull { get; private set; } = 10f;
         public float Speed { get; set; } // TODO Make private, create a setter method
         public Vector3 MoveTarget { get; private set; }
         public bool HasMoveTarget { get; private set; }
         public float FormationOffset { get; private set; } = 2f;
         public float SafetyOffset { get; private set; } = 2f;
-        public Faction Faction;
         private bool Alive { get; set; } = true;
         public float ScannerRadius { get; set; } = 10f;
 

@@ -13,13 +13,18 @@ namespace Perseus.Ships
             Ship = shipState;
         }
 
-        public Vector3 DetectEnemyShips()
+        public Vector3 DetectEnemyShips(Faction EnemyFaction)
         {
             // Change to use NonAlloc method later
             Collider[] enemyTargets = Physics.OverlapSphere(transform.position, Ship.ScannerRadius, TargetLayer);
             foreach (var target in enemyTargets)
             {
-                return target.transform.position;
+                ShipController shipController = target.GetComponentInParent<ShipController>();
+
+                if (shipController != null && shipController.GetFaction() == EnemyFaction)
+                {
+                    return target.transform.position;
+                }
             }
 
             return transform.position;

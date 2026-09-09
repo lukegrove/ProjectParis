@@ -4,24 +4,19 @@ using UnityEngine;
 // LostTarget
 //     Target was destroyed, disabled, or has been unreachable for a period.
 //     Clear it and return to Searching.
+//     Need ships to return to formation after combat
 
 // You can implement this with an enum and a single update method initially. 
 // Avoid introducing a full behavior-tree system until the basic loop works.
 
-// Need logic to determine what makes a target a valid target
-// Maybe if it has a shipcontroller and an identifier, and is alive?
-
-// Faction filter
 // Target selection, nearest or lowest health?
-
-// if current target is invalid:
-//     find a new target
 
 // if target disappears:
 //     clear target and search again
 
 // closer than minimum range: move away or reposition
 // The movement destination can become an orbit or formation position.
+
 
 [RequireComponent(typeof(ShipController))]
 public class ShipCombatAI : MonoBehaviour
@@ -81,10 +76,10 @@ public class ShipCombatAI : MonoBehaviour
 
         if (hasDestination)
         {
-            IInteractable _ = ShipController.GetEnemyShipInRange();
-            if (_ != null && ShipController.OrderShipToFire(_))
+            ShipController _ = ShipController.GetEnemyShipInRange();
+            if (_ != null)
             {
-                Debug.Log("Hit!");
+                ShipController.OrderShipToFire(_);
             }
         }
     }

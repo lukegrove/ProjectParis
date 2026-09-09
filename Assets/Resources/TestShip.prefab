@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 7800232677226238140}
   - component: {fileID: 2499801621512963814}
   - component: {fileID: 5202297622490490662}
-  - component: {fileID: 3687741112386483264}
   - component: {fileID: 4030301231629135032}
   - component: {fileID: 5205095008852313574}
   m_Layer: 8
@@ -162,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56942ba3425749344aa5ca9dd74869bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipController
+  Faction: 0
 --- !u!114 &2499801621512963814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,25 +194,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Perseus.Ships.ShipWeapon
   TargetLayer:
     serializedVersion: 2
-    m_Bits: 64
-  range: 10
+    m_Bits: 256
+  range: 5
   fireRate: 1
   cooldown: 0
---- !u!114 &3687741112386483264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6023159376172904211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48b5617ed9efaa34ba9c9eb8850aa057, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Perseus.Ships.ShipScanner
-  TargetLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  damage: 1
 --- !u!114 &4030301231629135032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Perseus.Ships.ShipScanner
   TargetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 256
 --- !u!114 &5205095008852313574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,3 +226,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a286bb2bae2b5a4db01d92b72114fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipCombatAI
+  hasTarget: 0
