@@ -18,9 +18,12 @@ public class ShipController : MonoBehaviour
     private Ship Ship;
     public Faction Faction;
     private Faction EnemyFaction;
+    private BattleSession BattleSession;
 
     private void Awake()
     {
+        BattleSession = FindAnyObjectByType<BattleSession>();
+
         Ship = new Ship();
 
         ShipMovement = GetComponent<ShipMovement>();
@@ -85,10 +88,11 @@ public class ShipController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Ship.TakeDamage(damage);
-        Debug.Log($"{name} took {damage} damage! Hull at {Ship.Hull}.");
+        //Debug.Log($"{name} took {damage} damage! Hull at {Ship.Hull}.");
 
         if (!Ship.IsAlive())
         {
+            BattleSession.ReportLoss(this);
             Destroy(gameObject);
         }
     }
