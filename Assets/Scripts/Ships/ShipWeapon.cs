@@ -7,36 +7,20 @@ namespace Perseus.Ships
     {
         public LayerMask TargetLayer;
 
-        public float range = 10f;
+        public float range = 5f;
         public float fireRate = 1f;
         public float cooldown = 0;
 
-        void Start()
+        private Ship Ship;
+
+        public void Initialize(Ship shipState)
         {
-            //
+            Ship = shipState;
         }
 
         void Update()
         {
-            if (cooldown == 0)
-            {
-                IInteractable target = FindTargetForward();
-                
-                if (target != null)
-                {
-                    target.Interact();
-                    cooldown = 1 / fireRate;
-                }
-
-                target = FindTargetLeft();
-                
-                if (target != null)
-                {
-                    target.Interact();
-                    cooldown = 1 / fireRate;
-                }
-            }
-            else if (cooldown > 0)
+            if (cooldown > 0)
             {
                 cooldown -= Time.deltaTime;
             }
@@ -46,38 +30,28 @@ namespace Perseus.Ships
             }
         }
 
-        private IInteractable FindTargetForward()
+        public IInteractable DetectShipsInRange()
         {
-            // Rays are an invisible line that takes the starting point and direction.
-            // So in this case the transform position and facing forward.
-            Ray ray = new(transform.position, transform.forward);
-
-            // Need spherecast + angle filtering
-            // Weapon should not always hit, maybe say ineffective attack?
-            if (Physics.Raycast(ray, out RaycastHit hit, range, TargetLayer))
+            Collider[] enemyTargets = Physics.OverlapSphere(transform.position, range, TargetLayer);
+            
+            foreach (var target in enemyTargets)
             {
-                if (hit.collider.gameObject.TryGetComponent(out IInteractable target))
-                {
-                    return target;
-                }
+                return target.GetComponent<IInteractable>();
             }
 
             return null;
         }
 
-        private IInteractable FindTargetLeft()
+        public bool FireAtTarget(IInteractable target)
         {
-            Ray ray = new(transform.position, -transform.right);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, range, TargetLayer))
+            if (target != null && cooldown == 0)
             {
-                if (hit.collider.gameObject.TryGetComponent(out IInteractable target))
-                {
-                    return target;
-                }
+                target.Interact();
+                cooldown = 1 / fireRate;
+                return true;
             }
 
-            return null;
+            return false;
         }
     }
 }

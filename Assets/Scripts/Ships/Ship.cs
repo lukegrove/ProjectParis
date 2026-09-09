@@ -2,6 +2,12 @@ using UnityEngine;
 
 namespace Perseus.Ships
 {
+    public enum Faction
+    {
+        Faction1,
+        Faction2
+    }
+
     public class Ship
     {
         public float MaxSpeed { get; private set; } = 5f;
@@ -13,6 +19,9 @@ namespace Perseus.Ships
         public bool HasMoveTarget { get; private set; }
         public float FormationOffset { get; private set; } = 2f;
         public float SafetyOffset { get; private set; } = 2f;
+        public Faction Faction;
+        private bool Alive { get; set; } = true;
+        public float ScannerRadius { get; set; } = 10f;
 
         public void SetMoveTarget(Vector3 destination)
         {
@@ -36,6 +45,16 @@ namespace Perseus.Ships
         public void TakeDamage(float damage)
         {
             Hull -= damage;
+
+            if (Hull <= 0)
+            {
+                Alive = false;
+            }
+        }
+
+        public bool IsAlive()
+        {
+            return Alive;
         }
     }
 }
