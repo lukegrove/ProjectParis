@@ -7,7 +7,7 @@ public class SelectionManager : MonoBehaviour
 
     public void SelectShip(ShipController ship)
     {
-        if (!SelectedShips.Contains(ship))
+        if (!SelectedShips.Contains(ship) && ship.GetFaction() == Faction.Faction1)
         {
             SelectedShips.Add(ship);
         }

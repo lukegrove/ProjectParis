@@ -1,5 +1,3 @@
-using System;
-using Perseus.Ships;
 using UnityEngine;
 
 [RequireComponent(typeof(SelectionManager))]

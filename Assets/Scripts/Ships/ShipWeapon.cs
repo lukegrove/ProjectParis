@@ -53,6 +53,7 @@ namespace Perseus.Ships
             if (target != null && cooldown == 0)
             {
                 target.TakeDamage(damage);
+                Debug.Log($"{name} dealt {damage} to {target.name}.");
                 cooldown = 1 / fireRate;
                 return true;
             }
