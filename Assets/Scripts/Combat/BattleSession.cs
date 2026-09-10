@@ -1,19 +1,20 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum BattleState
-{
-    InProgress,
-    Victory,
-    Defeat,
-    Draw
-}
-
+[RequireComponent(typeof(BattleManager))]
 public class BattleSession : MonoBehaviour
 {
-    private List<ShipController> AllyShips = new(), EnemyShips = new();
-    private BattleState BattleState;
-    private int AllyShipsLost, EnemyShipsLost;
+    private Battle Battle;
+    private BattleResult BattleResult;
+    private BattleManager BattleManager;
+    
+    void Awake()
+    {
+        Battle = new();
+
+        BattleManager = GetComponent<BattleManager>();
+    }
 
     void Start()
     {
@@ -21,11 +22,11 @@ public class BattleSession : MonoBehaviour
 
         foreach (ShipController ship in ships)
         {
-            RegisterShip(ship);
+            Battle.RegisterShip(ship);
         }
 
-        Debug.Log($"Starting {AllyShips.Count} vs {EnemyShips.Count}");
-        BattleState = BattleState.InProgress;
+        Debug.Log($"Starting {Battle.AllyShips.Count} vs {Battle.EnemyShips.Count}");
+        Battle.BattleState = BattleState.InProgress;
     }
 
     void Update()
@@ -33,70 +34,33 @@ public class BattleSession : MonoBehaviour
         //
     }
 
-    private void RegisterShip(ShipController ship)
-    {
-        if (ship == null)
-        {
-            return;
-        }
-
-        if (AllyShips.Contains(ship) || EnemyShips.Contains(ship))
-        {
-            return;
-        }
-
-        if (ship.GetFaction() == Faction.Faction1)
-        {
-            AllyShips.Add(ship);
-        }
-        else
-        {
-            EnemyShips.Add(ship);
-        }
-    }
-
     public void ReportLoss(ShipController ship)
     {
-        if (ship == null)
+        if (Battle.ReportLoss(ship))
         {
-            return;
-        }
+            if (ship.Faction == Faction.Faction1)
+            {
+                Debug.Log($"Allied ship lost.");
+            }
+            else
+            {
+                Debug.Log($"Enemy ship destroyed.");
+            }
 
-        if (BattleState != BattleState.InProgress)
-        {
-            return;
-        }
-
-        if (ship.Faction == Faction.Faction1)
-        {
-            Debug.Log($"Allied ship lost.");
-            AllyShips.Remove(ship);
-            AllyShipsLost++;
-            CheckBattleState();
-        }
-        else
-        {
-            Debug.Log($"Enemy ship destroyed.");
-            EnemyShips.Remove(ship);
-            EnemyShipsLost++;
-            CheckBattleState();
-        }
-    }
-
-    public void CheckBattleState()
-    {
-        if (BattleState == BattleState.InProgress && AllyShips.Count == 0)
-        {
-            Debug.Log("Battle lost!");
-            Debug.Log($"You lost {AllyShipsLost} ships and destroyed {EnemyShipsLost} enemy ships.");
-            BattleState = BattleState.Defeat;
-        }
-        
-        if (BattleState == BattleState.InProgress && EnemyShips.Count == 0)
-        {
-            Debug.Log("Battle won!");
-            Debug.Log($"You lost {AllyShipsLost} ships and destroyed {EnemyShipsLost} enemy ships.");
-            BattleState = BattleState.Victory;
+            if (Battle.BattleState == BattleState.Victory)
+            {
+                Debug.Log("Battle won!");
+                Debug.Log($"You lost {Battle.AllyShipsLost} ships and destroyed {Battle.EnemyShipsLost} enemy ships.");
+                BattleResult = Battle.CreateResults(); 
+                BattleManager.EndBattle(BattleResult);
+            }
+            else if (Battle.BattleState == BattleState.Defeat)
+            {
+                Debug.Log("Battle lost!");
+                Debug.Log($"You lost {Battle.AllyShipsLost} ships and destroyed {Battle.EnemyShipsLost} enemy ships.");
+                BattleResult = Battle.CreateResults();
+                BattleManager.EndBattle(BattleResult);
+            }
         }
     }
 }
