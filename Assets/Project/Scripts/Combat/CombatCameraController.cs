@@ -1,42 +1,45 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CombatCameraController : MonoBehaviour
+namespace ProjectParis.Combat
 {
-    [SerializeField] 
-    private float moveSpeed = 15f;
-
-    private void Update()
+    public class CombatCameraController : MonoBehaviour
     {
-        var keyboard = Keyboard.current;
+        [SerializeField] 
+        private float moveSpeed = 15f;
 
-        if (keyboard == null)
+        private void Update()
         {
-            return;
-        }
+            var keyboard = Keyboard.current;
 
-        Vector3 move = Vector3.zero;
+            if (keyboard == null)
+            {
+                return;
+            }
 
-        if (keyboard.wKey.isPressed)
-        {
-            move.z += 1f;
-        }
+            Vector3 move = Vector3.zero;
 
-        if (keyboard.sKey.isPressed)
-        {
-            move.z -= 1f;
-        } 
+            if (keyboard.wKey.isPressed)
+            {
+                move.z += 1f;
+            }
 
-        if (keyboard.dKey.isPressed)
-        {
-            move.x += 1f;
-        }
+            if (keyboard.sKey.isPressed)
+            {
+                move.z -= 1f;
+            } 
+
+            if (keyboard.dKey.isPressed)
+            {
+                move.x += 1f;
+            }
         
-        if (keyboard.aKey.isPressed)
-        {
-            move.x -= 1f;
-        }
+            if (keyboard.aKey.isPressed)
+            {
+                move.x -= 1f;
+            }
 
-        transform.position += moveSpeed * Time.deltaTime * move.normalized;
+            transform.position += moveSpeed * Time.deltaTime * move.normalized;
+        }
     }
 }

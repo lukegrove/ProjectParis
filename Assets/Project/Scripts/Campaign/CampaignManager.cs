@@ -1,35 +1,39 @@
-using Perseus.Ships;
-using Unity.VisualScripting;
 using UnityEngine;
+using ProjectParis.Combat.Ships;
+using ProjectParis.Combat.Battles;
+using ProjectParis.Campaign.Parties;
 
-public class CampaignManager : MonoBehaviour
+namespace ProjectParis.Campaign
 {
-    public PartyController PlayerParty;
-    private PartyController EncounterParty;
-
-    public void ReportEncounter(PartyController encounterParty)
+    public class CampaignManager : MonoBehaviour
     {
-        EncounterParty = encounterParty;
-    }
+        public PartyController PlayerParty;
+        private PartyController EncounterParty;
 
-    public void EndBattle(BattleResult battleResult)
-    {
-        foreach (Ship ship in battleResult.AllyShipsLost)
+        public void ReportEncounter(PartyController encounterParty)
         {
-            PlayerParty.RemoveShip(ship);
+            EncounterParty = encounterParty;
         }
 
-        foreach (Ship ship in battleResult.EnemyShipsLost)
+        public void EndBattle(BattleResult battleResult)
         {
-            EncounterParty.RemoveShip(ship);
-        }
-
-        if (battleResult.BattleState == BattleState.Victory)
-        {
-            if (EncounterParty != null && EncounterParty.GetShipCount() == 0)
+            foreach (Ship ship in battleResult.AllyShipsLost)
             {
-                Destroy(EncounterParty.gameObject);
-                EncounterParty = null;
+                PlayerParty.RemoveShip(ship);
+            }
+
+            foreach (Ship ship in battleResult.EnemyShipsLost)
+            {
+                EncounterParty.RemoveShip(ship);
+            }
+
+            if (battleResult.BattleState == BattleState.Victory)
+            {
+                if (EncounterParty != null && EncounterParty.GetShipCount() == 0)
+                {
+                    Destroy(EncounterParty.gameObject);
+                    EncounterParty = null;
+                }
             }
         }
     }

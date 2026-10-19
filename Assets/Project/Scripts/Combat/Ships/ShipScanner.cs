@@ -2,7 +2,7 @@ using Unity.InferenceEngine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Perseus.Ships
+namespace ProjectParis.Combat.Ships
 {
     public class ShipScanner : MonoBehaviour
     {

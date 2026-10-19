@@ -1,82 +1,86 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using ProjectParis.Combat.Ships;
 
-[RequireComponent(typeof(FleetController))]
-[RequireComponent(typeof(SelectionManager))]
-public class InputManager : MonoBehaviour
+namespace ProjectParis.Combat
 {
-    public LayerMask CombatPlane;
-    public LayerMask ShipLayer;
-    private FleetController FleetController;
-    private SelectionManager SelectionManager;
-    private Ray Ray;
-
-    private void Awake()
+    [RequireComponent(typeof(FleetController))]
+    [RequireComponent(typeof(SelectionManager))]
+    public class InputManager : MonoBehaviour
     {
-        FleetController = GetComponent<FleetController>();
-        SelectionManager = GetComponent<SelectionManager>();
-    }
+        public LayerMask CombatPlane;
+        public LayerMask ShipLayer;
+        private FleetController FleetController;
+        private SelectionManager SelectionManager;
+        private Ray Ray;
 
-    void Update()
-    {
-        if (Mouse.current == null)
+        private void Awake()
         {
-            return;
+            FleetController = GetComponent<FleetController>();
+            SelectionManager = GetComponent<SelectionManager>();
         }
 
-        var keyboard = Keyboard.current;
-
-        if (keyboard.leftShiftKey.isPressed && Mouse.current.leftButton.wasPressedThisFrame)
+        void Update()
         {
-            UpdateShipSelection(true);
-        }
-        else if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            UpdateShipSelection(false);
-        }
-
-        if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            UpdateFleetOrders();
-        }
-    }
-
-    public void UpdateShipSelection(bool multiSelect)
-    {
-        Ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        if (Physics.Raycast(Ray, out RaycastHit hit, Mathf.Infinity, ShipLayer))
-        {
-            ShipController ship = hit.collider.gameObject.GetComponentInParent<ShipController>();
-            
-            if (ship != null)
+            if (Mouse.current == null)
             {
-                if (!multiSelect)
-                {
-                    SelectionManager.UnselectAllShips();
-                }
+                return;
+            }
 
-                SelectionManager.SelectShip(ship);
+            var keyboard = Keyboard.current;
+
+            if (keyboard.leftShiftKey.isPressed && Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                UpdateShipSelection(true);
+            }
+            else if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                UpdateShipSelection(false);
+            }
+
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                UpdateFleetOrders();
             }
         }
-        else
-        {
-            SelectionManager.UnselectAllShips();
-        }
-    }
 
-    public void UpdateFleetOrders()
-    {
-        if (!SelectionManager.IsEmpty())
+        public void UpdateShipSelection(bool multiSelect)
         {
             Ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            LayerMask mask = CombatPlane.value == 0 ? ~0 : CombatPlane;
 
-            if (Physics.Raycast(Ray, out RaycastHit hit, 1000f, mask))
+            if (Physics.Raycast(Ray, out RaycastHit hit, Mathf.Infinity, ShipLayer))
             {
-                Vector3 moveTarget = hit.point;
-                moveTarget.y = transform.position.y;
-                FleetController.OrderSelectedShipsToTarget(moveTarget);
+                ShipController ship = hit.collider.gameObject.GetComponentInParent<ShipController>();
+            
+                if (ship != null)
+                {
+                    if (!multiSelect)
+                    {
+                        SelectionManager.UnselectAllShips();
+                    }
+
+                    SelectionManager.SelectShip(ship);
+                }
+            }
+            else
+            {
+                SelectionManager.UnselectAllShips();
+            }
+        }
+
+        public void UpdateFleetOrders()
+        {
+            if (!SelectionManager.IsEmpty())
+            {
+                Ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+                LayerMask mask = CombatPlane.value == 0 ? ~0 : CombatPlane;
+
+                if (Physics.Raycast(Ray, out RaycastHit hit, 1000f, mask))
+                {
+                    Vector3 moveTarget = hit.point;
+                    moveTarget.y = transform.position.y;
+                    FleetController.OrderSelectedShipsToTarget(moveTarget);
+                }
             }
         }
     }

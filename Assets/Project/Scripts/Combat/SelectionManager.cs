@@ -1,25 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectParis.Combat.Ships;
 
-public class SelectionManager : MonoBehaviour
+namespace ProjectParis.Combat
 {
-    public List<ShipController> SelectedShips = new();
-
-    public void SelectShip(ShipController ship)
+    public class SelectionManager : MonoBehaviour
     {
-        if (!SelectedShips.Contains(ship) && ship.GetFaction() == Faction.Faction1)
+        public List<ShipController> SelectedShips = new();
+
+        public void SelectShip(ShipController ship)
         {
-            SelectedShips.Add(ship);
+            if (!SelectedShips.Contains(ship) && ship.GetFaction() == Faction.Faction1)
+            {
+                SelectedShips.Add(ship);
+            }
         }
-    }
 
-    public void UnselectAllShips()
-    {
-        SelectedShips.Clear();
-    }
+        public void UnselectAllShips()
+        {
+            SelectedShips.Clear();
+        }
 
-    public bool IsEmpty()
-    {
-        return SelectedShips.Count == 0;
+        public bool IsEmpty()
+        {
+            return SelectedShips.Count == 0;
+        }
     }
 }

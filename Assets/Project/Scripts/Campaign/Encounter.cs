@@ -1,19 +1,23 @@
-using UnityEngine.SceneManagement;
+using ProjectParis.Combat.Battles;
+using ProjectParis.Campaign.Parties;
 
-public class Encounter
+namespace ProjectParis.Campaign
 {
-    public Party Initiator;
-    public Party Target;
-    public BattleResult Result;
-
-    public Encounter(Party initiator, Party target)
+    public class Encounter
     {
-        Initiator = initiator;
-        Target = target;
-    }
+        public Party Initiator;
+        public Party Target;
+        public BattleResult Result;
 
-    public void Attack()
-    {
-        BattleTransfer.StartBattle(Initiator, Target);
+        public Encounter(Party initiator, Party target)
+        {
+            Initiator = initiator;
+            Target = target;
+        }
+
+        public void Attack()
+        {
+            BattleTransfer.StartBattle(Initiator, Target);
+        }
     }
 }

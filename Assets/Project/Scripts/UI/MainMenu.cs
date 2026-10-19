@@ -6,31 +6,34 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 #endif
 
-public sealed class MainMenu : MonoBehaviour
+namespace ProjectParis.UI
 {
-    public string NavalTestArena = "NavalTestArena";
-    public string CampaignMap = "CampaignMap";
-    [SerializeField] private GameObject firstSelectedButton;
-
-    private void Start()
+    public sealed class MainMenu : MonoBehaviour
     {
-        /*if (firstSelectedButton != null)
+        public string NavalTestArena = "NavalTestArena";
+        public string CampaignMap = "CampaignMap";
+        [SerializeField] private GameObject firstSelectedButton;
+
+        private void Start()
         {
-            EventSystem.current.SetSelectedGameObject(firstSelectedButton);
-        }*/
-    }
+            /*if (firstSelectedButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(firstSelectedButton);
+            }*/
+        }
 
-    public void Play()
-    {
-        SceneManager.LoadSceneAsync(CampaignMap);
-    }
+        public void Play()
+        {
+            SceneManager.LoadSceneAsync(CampaignMap);
+        }
 
-    public void Quit()
-    {
-        //#if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-        /*#else
-        Application.Quit();
-        #endif*/
+        public void Quit()
+        {
+            //#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+            /*#else
+            Application.Quit();
+            #endif*/
+        }
     }
 }
