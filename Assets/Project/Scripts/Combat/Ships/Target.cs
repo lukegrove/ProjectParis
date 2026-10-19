@@ -5,7 +5,7 @@ public interface IInteractable
     public void Interact();
 }
 
-namespace Perseus.Ships
+namespace ProjectParis.Combat.Ships
 {
     public class Target : MonoBehaviour, IInteractable
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Perseus.Ships
+namespace ProjectParis.Combat.Ships
 {
     public class ShipMovement : MonoBehaviour
     {

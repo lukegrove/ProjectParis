@@ -1,11 +1,16 @@
-using UnityEngine;
+/*using UnityEngine;
+using ProjectParis.Campaign.Parties;
 
-public class CampaignSession : MonoBehaviour
+namespace ProjectParis.Campaign
 {
-    private Party Party;
-
-    void Awake()
+    [RequireComponent(typeof(Party))]
+    public class CampaignSession : MonoBehaviour
     {
-        Party = GetComponent<Party>();
+        private Party Party;
+
+        void Awake()
+        {
+            Party = GetComponent<Party>();
+        }
     }
-}
+}*/

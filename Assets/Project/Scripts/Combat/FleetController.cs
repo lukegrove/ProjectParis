@@ -1,38 +1,42 @@
 using UnityEngine;
+using ProjectParis.Combat.Ships;
 
-[RequireComponent(typeof(SelectionManager))]
-public class FleetController : MonoBehaviour
+namespace ProjectParis.Combat
 {
-    public LayerMask CombatPlane;
-    private SelectionManager SelectionManager;
-
-    private void Awake()
+    [RequireComponent(typeof(SelectionManager))]
+    public class FleetController : MonoBehaviour
     {
-        SelectionManager = GetComponent<SelectionManager>();
-    }
+        public LayerMask CombatPlane;
+        private SelectionManager SelectionManager;
 
-    public void OrderSelectedShipsToTarget(Vector3 destination)
-    {
-        if (!SelectionManager.IsEmpty())
+        private void Awake()
         {
-            int shipCount = SelectionManager.SelectedShips.Count;
-            
-            int colCount = Mathf.CeilToInt(Mathf.Sqrt(shipCount));
-            int rowCount = Mathf.CeilToInt(shipCount / colCount);
+            SelectionManager = GetComponent<SelectionManager>();
+        }
 
-            for (int i = 0; i < shipCount; i++)
+        public void OrderSelectedShipsToTarget(Vector3 destination)
+        {
+            if (!SelectionManager.IsEmpty())
             {
-                ShipController ship = SelectionManager.SelectedShips[i];
+                int shipCount = SelectionManager.SelectedShips.Count;
+            
+                int colCount = Mathf.CeilToInt(Mathf.Sqrt(shipCount));
+                int rowCount = Mathf.CeilToInt(shipCount / colCount);
 
-                int column = i % colCount;
-                int row = i / colCount;
-                float xOffset = column - (colCount - 1) * 0.5f;
-                float zOffset = row - (rowCount - 1) * 0.5f;
-                Vector3 offset = new Vector3(xOffset, 0, zOffset) * ship.GetFormationOffset();
-                Vector3 offsetDestination = destination + offset;
+                for (int i = 0; i < shipCount; i++)
+                {
+                    ShipController ship = SelectionManager.SelectedShips[i];
 
-                //Debug.Log($"{ship.name} target: {offsetDestination}");
-                ship.OrderShipToTarget(offsetDestination);
+                    int column = i % colCount;
+                    int row = i / colCount;
+                    float xOffset = column - (colCount - 1) * 0.5f;
+                    float zOffset = row - (rowCount - 1) * 0.5f;
+                    Vector3 offset = new Vector3(xOffset, 0, zOffset) * ship.GetFormationOffset();
+                    Vector3 offsetDestination = destination + offset;
+
+                    //Debug.Log($"{ship.name} target: {offsetDestination}");
+                    ship.OrderShipToTarget(offsetDestination);
+                }
             }
         }
     }
