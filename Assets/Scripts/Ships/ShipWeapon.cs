@@ -5,7 +5,7 @@ namespace Perseus.Ships
 {
     public class ShipWeapon : MonoBehaviour
     {
-        public LayerMask TargetLayer;
+        private LayerMask TargetLayer;
 
         public float range = 5f;
         public float fireRate = 1f;
@@ -14,9 +14,10 @@ namespace Perseus.Ships
 
         private Ship Ship;
 
-        public void Initialize(Ship shipState)
+        public void Initialize(Ship shipState, LayerMask targetLayer)
         {
             Ship = shipState;
+            TargetLayer = targetLayer;
         }
 
         void Update()

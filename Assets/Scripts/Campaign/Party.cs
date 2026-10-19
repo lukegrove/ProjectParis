@@ -15,9 +15,10 @@ public class Party
         Ships.Add(new Ship());
     }
 
-    // Method to add ships
-
-    // Method to update with losses
+    public void RemoveShip(Ship ship)
+    {
+        Ships.Remove(ship);
+    }
 
     public void Stop()
     {

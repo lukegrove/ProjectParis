@@ -6,14 +6,15 @@ namespace Perseus.Ships
     {
         [SerializeField] private float AvoidanceRadius = 2f;
         [SerializeField] private float AvoidanceStrength = 2f;
-        [SerializeField] private LayerMask ShipLayer;
+        private LayerMask TargetLayer;
         [SerializeField] private float StoppingDistance = 0.2f;
 
         private Ship Ship;
 
-        public void Initialize(Ship shipState)
+        public void Initialize(Ship shipState, LayerMask targetLayer)
         {
             Ship = shipState;
+            TargetLayer = targetLayer;
         }
 
         private void Update()
@@ -38,7 +39,7 @@ namespace Perseus.Ships
 
             Vector3 avoidance = Vector3.zero;
 
-            Collider[] nearbyShips = Physics.OverlapSphere(shipTransform.position, AvoidanceRadius, ShipLayer);;
+            Collider[] nearbyShips = Physics.OverlapSphere(shipTransform.position, AvoidanceRadius, TargetLayer);
             
             foreach (Collider other in nearbyShips)
             {

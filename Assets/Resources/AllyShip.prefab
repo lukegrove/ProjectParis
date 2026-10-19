@@ -12,9 +12,13 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f98065d550b86434d94fafad4b502ce1, type: 2}
+    - target: {fileID: 5202297622490490662, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
+      propertyPath: damage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6023159376172904211, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
       propertyPath: m_Name
-      value: TestShip (4) Variant
+      value: AllyShip
       objectReference: {fileID: 0}
     - target: {fileID: 6071662946025224630, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
       propertyPath: m_LocalPosition.x

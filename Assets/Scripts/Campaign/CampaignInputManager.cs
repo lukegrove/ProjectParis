@@ -1,9 +1,12 @@
+using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PartyController))]
 public class CampaignInputManager : MonoBehaviour
 {
+    public CampaignManager campaignManager;
     public LayerMask CombatPlane;
     public LayerMask ShipLayer;
     private PartyController PlayerParty, TargetParty;
@@ -17,15 +20,16 @@ public class CampaignInputManager : MonoBehaviour
 
     void Update()
     {
-
         if (PendingEncounter && TargetParty != null)
         {
             float dist = Vector3.Distance(PlayerParty.transform.position, TargetParty.transform.position);
 
-            if (dist <= 1f)
+            if (PendingEncounter && dist <= 1f)
             {
-                Encounter encounter = new();
+                Encounter encounter = new(PlayerParty.Party, TargetParty.Party);
+                PendingEncounter = false;
                 encounter.Attack();
+                campaignManager.ReportEncounter(TargetParty);
             }
         }
 
@@ -65,7 +69,5 @@ public class CampaignInputManager : MonoBehaviour
             moveTarget.y = PlayerParty.transform.position.y;
             PlayerParty.OrderPartyToTarget(moveTarget);
         }
-
-        
     }
 }

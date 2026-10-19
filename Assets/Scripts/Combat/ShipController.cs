@@ -18,22 +18,28 @@ public class ShipController : MonoBehaviour
     private Ship Ship;
     public Faction Faction;
     private Faction EnemyFaction;
+    private LayerMask TargetLayer;
     private BattleSession BattleSession;
 
     private void Awake()
     {
         BattleSession = FindAnyObjectByType<BattleSession>();
 
-        Ship = new Ship();
-
         ShipMovement = GetComponent<ShipMovement>();
-        ShipMovement.Initialize(Ship);
 
         ShipScanner = GetComponent<ShipScanner>();
-        ShipScanner.Initialize(Ship);
 
         ShipWeapon = GetComponent<ShipWeapon>();
-        ShipWeapon.Initialize(Ship);
+    }
+
+    public void Initialize(Ship ship, Faction faction, LayerMask targetLayer)
+    {
+        Ship = ship;
+        Faction = faction;
+        TargetLayer = targetLayer;
+        ShipMovement.Initialize(Ship, TargetLayer);
+        ShipScanner.Initialize(Ship, TargetLayer);
+        ShipWeapon.Initialize(Ship, TargetLayer);
 
         if (Faction == Faction.Faction1)
         {
@@ -95,5 +101,10 @@ public class ShipController : MonoBehaviour
             BattleSession.ReportLoss(this);
             Destroy(gameObject);
         }
+    }
+
+    public Ship GetShip()
+    {
+        return Ship;
     }
 }

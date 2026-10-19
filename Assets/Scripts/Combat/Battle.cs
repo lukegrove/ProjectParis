@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Perseus.Ships;
 
 public enum BattleState
 {
@@ -11,8 +12,8 @@ public enum BattleState
 public class Battle
 {
     public List<ShipController> AllyShips = new(), EnemyShips = new();
+    public List<Ship> AllyCasualties = new(), EnemyCasualties = new();
     public BattleState BattleState;
-    public int AllyShipsLost, EnemyShipsLost;
 
     public void RegisterShip(ShipController ship)
     {
@@ -50,17 +51,25 @@ public class Battle
 
         if (ship.Faction == Faction.Faction1)
         {
-            AllyShips.Remove(ship);
-            AllyShipsLost++;
-            UpdateBattleState();
+            if (!AllyShips.Remove(ship))
+            {
+                return false;
+            }
+
+            AllyCasualties.Add(ship.GetShip());
         }
         else
         {
-            EnemyShips.Remove(ship);
-            EnemyShipsLost++;
-            UpdateBattleState();
+            if (!EnemyShips.Remove(ship))
+            {
+                return false;
+            }
+
+            EnemyCasualties.Add(ship.GetShip());
         }
 
+        UpdateBattleState();
+        
         return true;
     }
 
@@ -79,6 +88,6 @@ public class Battle
 
     public BattleResult CreateResults()
     {
-        return new BattleResult(BattleState, AllyShipsLost, EnemyShipsLost);
+        return new BattleResult(BattleState, AllyCasualties, EnemyCasualties);
     }
 }

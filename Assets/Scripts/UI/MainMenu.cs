@@ -9,6 +9,7 @@ using UnityEditor;
 public sealed class MainMenu : MonoBehaviour
 {
     public string NavalTestArena = "NavalTestArena";
+    public string CampaignMap = "CampaignMap";
     [SerializeField] private GameObject firstSelectedButton;
 
     private void Start()
@@ -21,7 +22,7 @@ public sealed class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadSceneAsync(NavalTestArena);
+        SceneManager.LoadSceneAsync(CampaignMap);
     }
 
     public void Quit()

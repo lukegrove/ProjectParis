@@ -1,9 +1,11 @@
+using Perseus.Ships;
 using UnityEngine;
 
 [RequireComponent(typeof(PartyMovement))]
 public class PartyController : MonoBehaviour
 {
-    private Party Party;
+    [System.NonSerialized]
+    public Party Party;
     private PartyMovement PartyMovement;
     public Faction Faction;
 
@@ -28,5 +30,15 @@ public class PartyController : MonoBehaviour
     public void OrderPartyToParty(Vector3 destination)
     {
         Party.SetMoveTarget(destination);
+    }
+
+    public void RemoveShip(Ship ship)
+    {
+        Party.RemoveShip(ship);
+    }
+
+    public int GetShipCount()
+    {
+        return Party.Ships.Count;
     }
 }
