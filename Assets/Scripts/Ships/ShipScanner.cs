@@ -1,3 +1,4 @@
+using Unity.InferenceEngine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,12 +6,13 @@ namespace Perseus.Ships
 {
     public class ShipScanner : MonoBehaviour
     {
-        public LayerMask TargetLayer;
+        private LayerMask TargetLayer;
         private Ship Ship;
 
-        public void Initialize(Ship shipState)
+        public void Initialize(Ship shipState, LayerMask targetLayer)
         {
             Ship = shipState;
+            TargetLayer = targetLayer;
         }
 
         public Vector3 DetectEnemyShips(Faction EnemyFaction)

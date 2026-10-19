@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Perseus.Ships
+namespace Perseus.Ships // Need to rename this to just like Ship or to ProjectParis.Ships
 {
     public class Ship
     {

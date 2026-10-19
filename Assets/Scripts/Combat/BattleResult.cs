@@ -1,12 +1,15 @@
+using System.Collections.Generic;
+using Perseus.Ships;
+
 public class BattleResult
 {
-    public BattleState Result { get; }
-	public int AllyShipsLost { get; }
-	public int EnemyShipsLost { get; }
+	public List<Ship> AllyShipsLost { get; }
+	public List<Ship> EnemyShipsLost { get; }
+	public BattleState BattleState { get; }
 
-	public BattleResult(BattleState result, int allyShipsLost, int enemyShipsLost)
+	public BattleResult(BattleState battleState, List<Ship> allyShipsLost, List<Ship> enemyShipsLost)
 	{
-		Result = result;
+		BattleState = battleState;
 		AllyShipsLost = allyShipsLost;
 		EnemyShipsLost = enemyShipsLost;
 	}
