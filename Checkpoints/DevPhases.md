@@ -12,8 +12,8 @@
 ~~Battle results / battle abstraction~~
       ↓
 PHASE 4 - MAJOR MILESTONE
-~~Campaign movement + encounters~~ + battle setup from party
-Basic gameplay loop
+~~Campaign movement + encounters + battle setup from party~~
+~~Basic gameplay loop~~
       ↓
 PHASE 5
 Code restructure + namespaces
