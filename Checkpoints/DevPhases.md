@@ -38,10 +38,13 @@
 
 ### Phase 6 — Party upgrades (major milestone)
 
-- Party composition
-- Ship types
+- ~~Party composition~~
+- ~~Ship types~~
+- ~~Ship weapons~~
 - Ship properties
+- ~~Ship prefabs~~
 - Ship behaviors
+- Ship component types
 - Improved combat AI
 - Party behavior
     - Parties move around
@@ -62,6 +65,12 @@
 - Open UI on arrival
 - UI buttons
 - Close UI
+- Tab on bottom for general menu
+    - Party
+    - Reports
+    - Notes
+    - Inventory
+    - Character
 
 ### Phase 8 — Recruitment and notifications
 
@@ -79,6 +88,7 @@
 
 - Faction logic independent of ships
 - Relation tracker for factions
+- Ally and enemy tags for battles
 
 ### Phase 11 — Character progression and RPG systems (major milestone)
 
@@ -98,6 +108,9 @@
     - First person camera inside ship interior?
     - Console for battle map?
 - Commands for fleet and individual ships
+- More ship types
+- More ship weapons
+- Ship upgrade tiers
 
 ### Phase 14 — Player character control
 

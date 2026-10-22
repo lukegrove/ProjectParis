@@ -17,9 +17,9 @@ namespace ProjectParis.Campaign.Parties
             PartyMovement = GetComponent<PartyMovement>();
             PartyMovement.Initialize(Party);
 
-            Party.AddShip();
-            Party.AddShip();
-            Party.AddShip();
+            Party.AddShipCorvette();
+            Party.AddShipDestroyer();
+            Party.AddShipDestroyer();
 
             Party.Faction = Faction;
         }

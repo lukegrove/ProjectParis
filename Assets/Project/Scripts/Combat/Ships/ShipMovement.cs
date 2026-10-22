@@ -80,7 +80,7 @@ namespace ProjectParis.Combat.Ships
                 shipTransform.rotation = Quaternion.Slerp(shipTransform.rotation, targetRotation, deltaTime * Ship.TurnSpeed);
             }
 
-            Ship.Speed = Mathf.MoveTowards(Ship.Speed, Ship.MaxSpeed, Ship.Acceleration * deltaTime);
+            Ship.SetSpeed(Mathf.MoveTowards(Ship.Speed, Ship.MaxSpeed, Ship.Acceleration * deltaTime));
 
             float step = Ship.Speed * deltaTime;
             float clampedStep = Mathf.Min(step, distanceToTarget);

@@ -682,8 +682,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleSession
   initiatorSpawn: {fileID: 323334409}
   targetSpawn: {fileID: 1160050968}
-  allyShipPrefab: {fileID: 6303625453397159623, guid: ea36bdda048d7304da3c43a946aaeb8d, type: 3}
-  enemyShipPrefab: {fileID: 334568249681425562, guid: 449194acc43c44540843877a67ca45fc, type: 3}
+  allyCorvettePrefab: {fileID: 6303625453397159623, guid: ea36bdda048d7304da3c43a946aaeb8d, type: 3}
+  allyDestroyerPrefab: {fileID: 7470025618954603071, guid: 7670f101c50f77341bdfb33081dd6ec9, type: 3}
+  enemyCorvettePrefab: {fileID: 334568249681425562, guid: 449194acc43c44540843877a67ca45fc, type: 3}
+  enemyDestroyerPrefab: {fileID: 16876326143246697, guid: 53fd9ec3be5f34e47a0e3b922601de6f, type: 3}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
