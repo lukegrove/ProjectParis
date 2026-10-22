@@ -41,18 +41,14 @@
 - ~~Party composition~~
 - ~~Ship types~~
 - ~~Ship weapons~~
-- Ship properties
 - ~~Ship prefabs~~
-- Ship behaviors
-- Ship component types
-- Improved combat AI
 - Party behavior
-    - Parties move around
+    - ~~Parties move around~~
+    - ~~Parties assess relative strength~~
+    - ~~Parties move or flee from players~~
+    - ~~Parties have different speeds~~
     - Parties can interact with players
     - Parties display fleet size
-    - Parties assess relative strength
-    - Parties move or flee from players
-    - Parties have different speeds
 - Asynchronous battles
 - Auto-resolve
 
@@ -94,13 +90,15 @@
 
 - Player logic
 - Player stats
-- Stats influence party and ship stats
+- Party stats
+- Player stats influence party stats
 
 ### Phase 12 — Deeper campaign systems
 
 - Build on the campaign foundation
 - Models
 - Diplomacy, quests, loot, and more
+- Planetary markets
 
 ### Phase 13 — Combat overhaul
 
@@ -108,9 +106,21 @@
     - First person camera inside ship interior?
     - Console for battle map?
 - Commands for fleet and individual ships
+- Ship behaviors
+- Ship component types
+- Improved combat AI
 - More ship types
 - More ship weapons
 - Ship upgrade tiers
+- More ship stats
+    - Tier / upgrade level
+    - Attack stats
+    - Weapon proficiencies
+    - Build cost
+- Party stats influence ship stats
+- Updated battle end rules
+    - Can leave battles
+    - Battles don't auto end, hit tab to leave
 
 ### Phase 14 — Player character control
 

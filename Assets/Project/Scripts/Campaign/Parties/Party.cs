@@ -22,6 +22,11 @@ namespace ProjectParis.Campaign.Parties
             Ships.Add(new ShipDestroyer());
         }
 
+        public void AddShipCommand()
+        {
+            Ships.Add(new ShipCommand());
+        }
+
         public void RemoveShip(Ship ship)
         {
             Ships.Remove(ship);
@@ -44,5 +49,6 @@ namespace ProjectParis.Campaign.Parties
             MoveTarget = party.transform.position;
             HasMoveTarget = true;
         }
+
     }
 }

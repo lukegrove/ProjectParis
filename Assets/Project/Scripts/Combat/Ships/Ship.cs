@@ -5,7 +5,8 @@ public enum ShipType
 {
     None,
     Corvette,
-    Destroyer
+    Destroyer,
+    Command
 }
 
 namespace ProjectParis.Combat.Ships
@@ -16,6 +17,7 @@ namespace ProjectParis.Combat.Ships
         public float Acceleration { get; private set; }
         public float TurnSpeed { get; private set; }
         public float Hull { get; private set; }
+        //public float Shields { get; private set; }
         public float Speed { get; private set; }
         public float FormationOffset { get; private set; } = 2f;
         public float SafetyOffset { get; private set; } = 2f;
@@ -99,6 +101,12 @@ namespace ProjectParis.Combat.Ships
 
         public void TakeDamage(float damage)
         {
+            /*if (Shields > 0) Needs to be set before this
+            {
+                Shields-= damage;
+                return;
+            }*/
+
             Hull -= damage;
 
             if (Hull <= 0)

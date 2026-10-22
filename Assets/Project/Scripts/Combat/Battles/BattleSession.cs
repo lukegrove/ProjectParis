@@ -12,6 +12,7 @@ namespace ProjectParis.Combat.Battles
         [SerializeField] private GameObject targetSpawn;
         [SerializeField] private GameObject allyCorvettePrefab;
         [SerializeField] private GameObject allyDestroyerPrefab;
+        [SerializeField] private GameObject allyCommandPrefab;
         [SerializeField] private GameObject enemyCorvettePrefab;
         [SerializeField] private GameObject enemyDestroyerPrefab;
         [SerializeField] private LayerMask targetLayer;
@@ -78,9 +79,13 @@ namespace ProjectParis.Combat.Battles
                     {
                         prefab = allyCorvettePrefab;
                     }
-                    else
+                    else if (ship.ShipType == ShipType.Destroyer)
                     {
                         prefab = allyDestroyerPrefab;
+                    }
+                    else
+                    {
+                        prefab = allyCommandPrefab;
                     }
                 }
                 else

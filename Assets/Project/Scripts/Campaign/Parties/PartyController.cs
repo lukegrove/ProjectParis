@@ -14,14 +14,24 @@ namespace ProjectParis.Campaign.Parties
         void Awake()
         {
             Party = new Party();
-            PartyMovement = GetComponent<PartyMovement>();
-            PartyMovement.Initialize(Party);
 
             Party.AddShipCorvette();
             Party.AddShipDestroyer();
             Party.AddShipDestroyer();
 
             Party.Faction = Faction;
+
+            if (Faction == Faction.Faction1)
+            {
+                Party.AddShipCommand();
+            }
+            else
+            {
+                Party.AddShipCorvette();
+            }
+
+            PartyMovement = GetComponent<PartyMovement>();
+            PartyMovement.Initialize(Party);
         }
 
         public void OrderPartyToTarget(Vector3 destination)
@@ -42,6 +52,11 @@ namespace ProjectParis.Campaign.Parties
         public int GetShipCount()
         {
             return Party.Ships.Count;
+        }
+
+        public Faction GetFaction()
+        {
+            return Party.Faction;
         }
     }
 }
