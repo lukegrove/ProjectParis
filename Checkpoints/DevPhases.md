@@ -135,7 +135,7 @@
 - Pass time mechanic
 - Orbit change over time
 
-### Phase 14 — Full campaign map for starting system
+### Phase 15 — Full campaign map for starting system
 
 - Make starting system look more pretty
 - Prototype or placeholder for FTL travel
