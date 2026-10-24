@@ -33,6 +33,14 @@ namespace ProjectParis.Campaign.Parties
                     hasTarget = false;
                     encounter.Attack();
                     campaignManager.ReportEncounter(PartyController);
+                    // if (TargetParty.IsPlayer)
+                    // {
+                    // }
+                    // else
+                    // {
+                    //     encounter.AsynchBattle();
+                    //     campaignManager.ReportEncounter(PartyController);
+                    // }
                 }
             }
 

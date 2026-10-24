@@ -34,9 +34,7 @@
 
 ### ~~Phase 5 — Code restructure and namespaces~~
 
-## In Development
-
-### Phase 6 — Party upgrades (major milestone)
+### ~~Phase 6 — Party upgrades (major milestone)~~
 
 - ~~Party composition~~
 - ~~Ship types~~
@@ -49,10 +47,8 @@
     - ~~Parties have different speeds~~
     - ~~Parties can interact with players~~
     - ~~Parties display fleet size~~
-- Asynchronous battles
-- Auto-resolve
 
-## Upcoming
+## In Development
 
 ### Phase 7 — Locations and interface
 
@@ -67,6 +63,8 @@
     - Notes
     - Inventory
     - Character
+
+## Upcoming
 
 ### Phase 8 — Recruitment and notifications
 
@@ -121,6 +119,9 @@
 - Updated battle end rules
     - Can leave battles
     - Battles don't auto end, hit tab to leave
+- Fix bugs with AI started battles
+- Auto-resolve
+- Asynchronous battles
 
 ### Phase 14 — Player character control
 

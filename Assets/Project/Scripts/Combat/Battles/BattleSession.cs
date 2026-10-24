@@ -102,7 +102,7 @@ namespace ProjectParis.Combat.Battles
 
                 ShipController shipController = shipObject.GetComponent<ShipController>();
                 shipController.Initialize(ship, faction, targetLayer);
-                Battle.RegisterShip(shipController);
+                Battle.RegisterShip(ship);
                 index++;
             }
         }
@@ -122,7 +122,7 @@ namespace ProjectParis.Combat.Battles
 
         public void ReportLoss(ShipController ship)
         {
-            if (Battle.ReportLoss(ship))
+            if (Battle.ReportLoss(ship.GetShip()))
             {
                 if (ship.Faction == Faction.Faction1)
                 {

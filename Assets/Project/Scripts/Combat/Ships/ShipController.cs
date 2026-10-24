@@ -41,6 +41,7 @@ namespace ProjectParis.Combat.Ships
         {
             Ship = ship;
             Faction = faction;
+            ship.faction = Faction;
             TargetLayer = targetLayer;
             ShipMovement.Initialize(Ship, TargetLayer);
             ShipScanner.Initialize(Ship, TargetLayer);

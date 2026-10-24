@@ -28,6 +28,8 @@ namespace ProjectParis.Combat.Ships
         public Vector3 MoveTarget { get; private set; }
         public List<WeaponType> WeaponLoadout { get; private set; }
         public ShipType ShipType { get; private set; }
+        public int Weight { get; private set; } = 1;
+        public Faction faction;
 
         protected void SetShipType(ShipType shipType)
         {

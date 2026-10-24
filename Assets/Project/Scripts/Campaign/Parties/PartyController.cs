@@ -11,6 +11,7 @@ namespace ProjectParis.Campaign.Parties
         private PartyMovement PartyMovement;
         private PartySizeView PartySizeView;
         public Faction Faction;
+        public bool IsPlayer;
 
         void Awake()
         {
