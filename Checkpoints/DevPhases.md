@@ -2,29 +2,29 @@
 
 ## Completed
 
-### ~~Phase 0 — Project foundation~~
+### Phase 0 — Project foundation
 
-### ~~Phase 1 — Tiny ship combat prototype~~
+### Phase 1 — Tiny ship combat prototype
 
 - ~~Ship object~~
 - ~~Target object~~
 - ~~Camera object~~
 
-### ~~Phase 2 — Multiple ships and basic AI (major milestone)~~
+### Phase 2 — Multiple ships and basic AI (major milestone)
 
 - ~~Ship/input/selection/fleet controllers~~
 - ~~Ship collision avoidance~~
 - ~~AI factions and battle~~
 - ~~Basic battle AI~~
 
-### ~~Phase 3 — Battle results and battle abstraction~~
+### Phase 3 — Battle results and battle abstraction
 
 - ~~Battle session logic~~
 - ~~Results tracker~~
 - ~~Main menu~~
 - ~~Battle abstraction~~
 
-### ~~Phase 4 — Basic gameplay loop (major milestone)~~
+### Phase 4 — Basic gameplay loop (major milestone)
 
 - ~~Parties~~
 - ~~Party movement and encounters~~
@@ -32,9 +32,9 @@
 - ~~Campaign continues after battle~~
 - ~~Battle results apply to Party~~
 
-### ~~Phase 5 — Code restructure and namespaces~~
+### Phase 5 — Code restructure and namespaces
 
-### ~~Phase 6 — Party upgrades (major milestone)~~
+### Phase 6 — Party upgrades (major milestone)
 
 - ~~Party composition~~
 - ~~Ship types~~
@@ -113,7 +113,7 @@
 - More ship stats
     - Tier / upgrade level
     - Attack stats
-    - Weapon proficiencies
+    - Weapon proficiency
     - Build cost
 - Party stats influence ship stats
 - Updated battle end rules
@@ -139,6 +139,6 @@
 
 ### Phase 17 — Full campaign map for starting system
 
-- Prototype for FTL travel
+- Prototype or placeholder for FTL travel
 
 ### Phase 18 — Project Paris Alpha Complete
