@@ -9,6 +9,7 @@ namespace ProjectParis.Campaign.Parties
         [System.NonSerialized]
         public Party Party;
         private PartyMovement PartyMovement;
+        private PartySizeView PartySizeView;
         public Faction Faction;
 
         void Awake()
@@ -32,6 +33,9 @@ namespace ProjectParis.Campaign.Parties
 
             PartyMovement = GetComponent<PartyMovement>();
             PartyMovement.Initialize(Party);
+
+            PartySizeView = GetComponentInChildren<PartySizeView>();
+            PartySizeView.Initialize(this);
         }
 
         public void OrderPartyToTarget(Vector3 destination)
@@ -47,6 +51,10 @@ namespace ProjectParis.Campaign.Parties
         public void RemoveShip(Ship ship)
         {
             Party.RemoveShip(ship);
+            if (PartySizeView != null)
+            {
+                PartySizeView.RefreshCount();
+            }
         }
 
         public int GetShipCount()

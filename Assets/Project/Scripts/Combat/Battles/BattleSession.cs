@@ -38,20 +38,10 @@ namespace ProjectParis.Combat.Battles
                 return;
             }
 
-            bool player = BattleTransfer.IsPlayerInitiator;
+            bool initiatorIsPlayer = BattleTransfer.IsPlayerInitiator;
 
-            RegisterShips(BattleTransfer.Target.Ships, targetSpawn.transform, BattleTransfer.Target.Faction, player);
-            
-            if (player == true)
-            {
-                player = false;
-            }
-            else
-            {
-                player = true;
-            }
-
-            RegisterShips(BattleTransfer.Initiator.Ships, initiatorSpawn.transform, BattleTransfer.Initiator.Faction, player);
+            RegisterShips(BattleTransfer.Target.Ships, targetSpawn.transform, BattleTransfer.Target.Faction, !initiatorIsPlayer);
+            RegisterShips(BattleTransfer.Initiator.Ships, initiatorSpawn.transform, BattleTransfer.Initiator.Faction, initiatorIsPlayer);
 
             Debug.Log($"Starting {Battle.AllyShips.Count} vs {Battle.EnemyShips.Count}");
             Battle.BattleState = BattleState.InProgress;

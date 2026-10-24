@@ -15,9 +15,9 @@ namespace ProjectParis.Campaign
             Target = target;
         }
 
-        public void Attack()
+        public void Attack(bool isPlayer = false)
         {
-            BattleTransfer.StartBattle(Initiator, Target);
+            BattleTransfer.StartBattle(Initiator, Target, isPlayer);
         }
     }
 }

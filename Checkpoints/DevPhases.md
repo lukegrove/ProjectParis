@@ -42,13 +42,13 @@
 - ~~Ship types~~
 - ~~Ship weapons~~
 - ~~Ship prefabs~~
-- Party behavior
+- ~~Party behavior~~
     - ~~Parties move around~~
     - ~~Parties assess relative strength~~
     - ~~Parties move or flee from players~~
     - ~~Parties have different speeds~~
-    - Parties can interact with players
-    - Parties display fleet size
+    - ~~Parties can interact with players~~
+    - ~~Parties display fleet size~~
 - Asynchronous battles
 - Auto-resolve
 

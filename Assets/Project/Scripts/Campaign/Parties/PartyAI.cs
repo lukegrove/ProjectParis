@@ -13,6 +13,8 @@ namespace ProjectParis.Campaign.Parties
         public bool hasTarget;
         private bool hasDestination;
         public LayerMask TargetLayer;
+        private PartyController TargetParty;
+        public CampaignManager campaignManager;
 
         private void Awake()
         {
@@ -21,6 +23,19 @@ namespace ProjectParis.Campaign.Parties
 
         void Update()
         {
+            if (TargetParty != null)
+            {
+                float dist = Vector3.Distance(transform.position, TargetParty.transform.position);
+
+                if (hasTarget && dist <= 1f)
+                {
+                    Encounter encounter = new(PartyController.Party, TargetParty.Party);
+                    hasTarget = false;
+                    encounter.Attack();
+                    campaignManager.ReportEncounter(PartyController);
+                }
+            }
+
             ScanTimer -= Time.deltaTime;
 
             if (ScanTimer > 0f)
@@ -79,6 +94,7 @@ namespace ProjectParis.Campaign.Parties
                 {
                     if (targetParty.GetShipCount() <= PartyController.GetShipCount())
                     {
+                        TargetParty = targetParty;
                         Vector3 direction = (target.transform.position - transform.position).normalized;
                         Vector3 newDestination = target.transform.position + direction;
                         return newDestination;
