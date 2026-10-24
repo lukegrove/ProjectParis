@@ -137,6 +137,7 @@
 
 ### Phase 14 — Full campaign map for starting system
 
+- Make starting system look more pretty
 - Prototype or placeholder for FTL travel
 
 ### Phase 16 — Project Paris Alpha Complete
