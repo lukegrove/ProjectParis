@@ -52,23 +52,24 @@
 
 ### Phase 7 — Locations and interface
 
-- Location objects
-- Location logic
-- Open UI on arrival
-- UI buttons
-- Close UI
+- Campaign code cleanup
 - Tab on bottom for general menu
     - Party
     - Reports
     - Notes
     - Inventory
     - Character
+- Location objects
+- Location logic
+- Open UI on arrival
+- UI buttons
+- Close UI
 
 ## Upcoming
 
 ### Phase 8 — Recruitment and notifications
 
-- UI prompt for recruitment
+- UI prompt for recruitment on locations
 - Recruitment limit
 - Recruitment limit reset
 - Prototype notification system
@@ -94,11 +95,12 @@
 ### Phase 12 — Deeper campaign systems
 
 - Build on the campaign foundation
-- Models
+    - More flexible phase
+- Party, ship, location models
 - Diplomacy, quests, loot, and more
 - Planetary markets
 
-### Phase 13 — Combat overhaul
+### Phase 13 — Combat overhaul (major milestone)
 
 - Convert to single ship control
     - First person camera inside ship interior?
@@ -107,6 +109,8 @@
 - Ship behaviors
 - Ship component types
 - Improved combat AI
+- Updated ship movement
+- Updated camera movement
 - More ship types
 - More ship weapons
 - Ship upgrade tiers
@@ -123,13 +127,7 @@
 - Auto-resolve
 - Asynchronous battles
 
-### Phase 14 — Player character control
-
-### Phase 15 — Location interiors
-
-- Preview image for location UI
-
-### Phase 16 — Location orbits and system logic
+### Phase 14 — Location orbits and system logic
 
 - Establish star system logic
 - Calculated orbits
@@ -137,8 +135,8 @@
 - Pass time mechanic
 - Orbit change over time
 
-### Phase 17 — Full campaign map for starting system
+### Phase 14 — Full campaign map for starting system
 
 - Prototype or placeholder for FTL travel
 
-### Phase 18 — Project Paris Alpha Complete
+### Phase 16 — Project Paris Alpha Complete
