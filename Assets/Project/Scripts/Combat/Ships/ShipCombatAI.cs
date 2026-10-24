@@ -47,7 +47,8 @@ namespace ProjectParis.Combat.Ships
             if (hasTarget)
             {
                 Vector3 direction = (target - transform.position).normalized;
-                Vector3 newDestination = target - direction * (ShipController.GetWeaponRange() - 1f);
+                float weaponRange = ShipController.GetWeaponRange();
+                Vector3 newDestination = target - direction * (weaponRange - 1f);
 
                 if (!hasDestination ||
                     (newDestination - destination).sqrMagnitude > 0.25f)

@@ -449,6 +449,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de6842d0d27af849b4ad2e271d1ebaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleSession
+  initiatorSpawn: {fileID: 0}
+  targetSpawn: {fileID: 0}
+  allyCorvettePrefab: {fileID: 0}
+  allyDestroyerPrefab: {fileID: 0}
+  enemyCorvettePrefab: {fileID: 0}
+  enemyDestroyerPrefab: {fileID: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  shipsPerRow: 3
+  shipSpacing: 4
 --- !u!4 &1913961575
 Transform:
   m_ObjectHideFlags: 0
@@ -476,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff2f1c4f2cc0a14a8dc5e92ed1760a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
-  MainMenu: MainMenu
+  CampaignMap: CampaignMap
 --- !u!1 &2030809674
 GameObject:
   m_ObjectHideFlags: 0

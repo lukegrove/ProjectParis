@@ -10,8 +10,11 @@ namespace ProjectParis.Combat.Battles
     {
         [SerializeField] private GameObject initiatorSpawn;
         [SerializeField] private GameObject targetSpawn;
-        [SerializeField] private GameObject allyShipPrefab;
-        [SerializeField] private GameObject enemyShipPrefab;
+        [SerializeField] private GameObject allyCorvettePrefab;
+        [SerializeField] private GameObject allyDestroyerPrefab;
+        [SerializeField] private GameObject allyCommandPrefab;
+        [SerializeField] private GameObject enemyCorvettePrefab;
+        [SerializeField] private GameObject enemyDestroyerPrefab;
         [SerializeField] private LayerMask targetLayer;
         [SerializeField] private int shipsPerRow = 3;
         [SerializeField] private float shipSpacing = 4f;
@@ -35,10 +38,10 @@ namespace ProjectParis.Combat.Battles
                 return;
             }
 
-            // Ally ships - Need to move implicit association between ally and initiator
-            RegisterShips(BattleTransfer.Initiator.Ships, allyShipPrefab, initiatorSpawn.transform, BattleTransfer.Initiator.Faction);
-            // Enemey ships
-            RegisterShips(BattleTransfer.Target.Ships, enemyShipPrefab, targetSpawn.transform, BattleTransfer.Target.Faction);
+            bool initiatorIsPlayer = BattleTransfer.IsPlayerInitiator;
+
+            RegisterShips(BattleTransfer.Target.Ships, targetSpawn.transform, BattleTransfer.Target.Faction, !initiatorIsPlayer);
+            RegisterShips(BattleTransfer.Initiator.Ships, initiatorSpawn.transform, BattleTransfer.Initiator.Faction, initiatorIsPlayer);
 
             Debug.Log($"Starting {Battle.AllyShips.Count} vs {Battle.EnemyShips.Count}");
             Battle.BattleState = BattleState.InProgress;
@@ -49,26 +52,57 @@ namespace ProjectParis.Combat.Battles
             //
         }
 
-        private void RegisterShips(List<Ship> ships, GameObject prefab, Transform spawn, Faction faction)
+        private void RegisterShips(List<Ship> ships, Transform spawn, Faction faction, bool isPlayer)
         {
             int index = 0;
+            GameObject prefab;
 
             foreach (Ship ship in ships)
             {
+                // Need to move implicit association between ally and initiator
+
                 ship.Stop();
+
+                if (isPlayer)
+                {
+                    if (ship.ShipType == ShipType.Corvette)
+                    {
+                        prefab = allyCorvettePrefab;
+                    }
+                    else if (ship.ShipType == ShipType.Destroyer)
+                    {
+                        prefab = allyDestroyerPrefab;
+                    }
+                    else
+                    {
+                        prefab = allyCommandPrefab;
+                    }
+                }
+                else
+                {
+                    if (ship.ShipType == ShipType.Corvette)
+                    {
+                        prefab = enemyCorvettePrefab;
+                    }
+                    else
+                    {
+                        prefab = enemyDestroyerPrefab;
+                    }
+                }
+                
+
                 GameObject shipObject = Instantiate(prefab, GetFormationPosition(spawn, index, ships.Count), Quaternion.identity);
                 SceneManager.MoveGameObjectToScene(shipObject, gameObject.scene);
 
                 if (shipObject.scene != gameObject.scene)
                 {
-                    Debug.LogError($"Spawned ship {shipObject.name} into scene {shipObject.scene.name}, not Battle.");
                     Destroy(shipObject);
                     continue;
                 }
 
                 ShipController shipController = shipObject.GetComponent<ShipController>();
                 shipController.Initialize(ship, faction, targetLayer);
-                Battle.RegisterShip(shipController);
+                Battle.RegisterShip(ship);
                 index++;
             }
         }
@@ -88,7 +122,7 @@ namespace ProjectParis.Combat.Battles
 
         public void ReportLoss(ShipController ship)
         {
-            if (Battle.ReportLoss(ship))
+            if (Battle.ReportLoss(ship.GetShip()))
             {
                 if (ship.Faction == Faction.Faction1)
                 {

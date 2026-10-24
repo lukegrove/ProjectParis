@@ -12,9 +12,19 @@ namespace ProjectParis.Campaign.Parties
         public bool HasMoveTarget;
         public Vector3 MoveTarget;
 
-        public void AddShip()
+        public void AddShipCorvette()
         {
-            Ships.Add(new Ship());
+            Ships.Add(new ShipCorvette());
+        }
+
+        public void AddShipDestroyer()
+        {
+            Ships.Add(new ShipDestroyer());
+        }
+
+        public void AddShipCommand()
+        {
+            Ships.Add(new ShipCommand());
         }
 
         public void RemoveShip(Ship ship)
@@ -39,5 +49,6 @@ namespace ProjectParis.Campaign.Parties
             MoveTarget = party.transform.position;
             HasMoveTarget = true;
         }
+
     }
 }

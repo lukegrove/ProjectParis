@@ -530,8 +530,8 @@ Transform:
   m_GameObject: {fileID: 1282738490}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 35, y: 1, z: 35}
+  m_LocalPosition: {x: 7.6, y: 0, z: -15.7}
+  m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -682,12 +682,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleSession
   initiatorSpawn: {fileID: 323334409}
   targetSpawn: {fileID: 1160050968}
-  allyShipPrefab: {fileID: 6303625453397159623, guid: ea36bdda048d7304da3c43a946aaeb8d, type: 3}
-  enemyShipPrefab: {fileID: 334568249681425562, guid: 449194acc43c44540843877a67ca45fc, type: 3}
+  allyCorvettePrefab: {fileID: 6303625453397159623, guid: ea36bdda048d7304da3c43a946aaeb8d, type: 3}
+  allyDestroyerPrefab: {fileID: 7470025618954603071, guid: 7670f101c50f77341bdfb33081dd6ec9, type: 3}
+  allyCommandPrefab: {fileID: 16876326143246697, guid: 5f07476348c7c9d4f8e38755421d1811, type: 3}
+  enemyCorvettePrefab: {fileID: 334568249681425562, guid: 449194acc43c44540843877a67ca45fc, type: 3}
+  enemyDestroyerPrefab: {fileID: 16876326143246697, guid: 53fd9ec3be5f34e47a0e3b922601de6f, type: 3}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
-  shipsPerRow: 3
+  shipsPerRow: 2
   shipSpacing: 4
 --- !u!4 &1913961575
 Transform:

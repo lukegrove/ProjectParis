@@ -29,7 +29,7 @@ namespace ProjectParis.Campaign
                 {
                     Encounter encounter = new(PlayerParty.Party, TargetParty.Party);
                     PendingEncounter = false;
-                    encounter.Attack();
+                    encounter.Attack(true);
                     campaignManager.ReportEncounter(TargetParty);
                 }
             }

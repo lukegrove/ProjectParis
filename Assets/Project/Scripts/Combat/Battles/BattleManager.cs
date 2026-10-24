@@ -10,6 +10,8 @@ namespace ProjectParis.Combat.Battles
         private Scene campaignScene;
         private Camera campaignCamera;
         private GameObject playerPartyObject;
+        private GameObject campaignMapFloor;
+        private bool campaignMapFloorWasActive;
         private CampaignManager campaignManager;
 
         private void Awake()
@@ -44,6 +46,21 @@ namespace ProjectParis.Combat.Battles
                         playerPartyObject = campaignInput.gameObject;
                     }
                 }
+
+                if (root.name == "CampaignMap")
+                {
+                    campaignMapFloor = root;
+                    campaignMapFloorWasActive = root.activeSelf;
+                }
+            }
+
+            if (campaignMapFloor != null)
+            {
+                campaignMapFloor.SetActive(false);
+            }
+            else
+            {
+                Debug.LogWarning("No CampaignMap floor found in CampaignMap.");
             }
 
             if (campaignCamera != null)
@@ -71,6 +88,11 @@ namespace ProjectParis.Combat.Battles
             {
                 Debug.LogError($"Could not make campaign scene '{CampaignMap}' active; Battle was not unloaded.");
                 return;
+            }
+
+            if (campaignMapFloor != null)
+            {
+                campaignMapFloor.SetActive(campaignMapFloorWasActive);
             }
 
             if (playerPartyObject != null)

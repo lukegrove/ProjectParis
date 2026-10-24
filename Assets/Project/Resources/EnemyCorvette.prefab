@@ -14,7 +14,19 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f2837735a155bef47b4c9265068376df, type: 2}
     - target: {fileID: 6023159376172904211, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
       propertyPath: m_Name
-      value: TestShip (1) Variant
+      value: EnemyCorvette
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071662946025224630, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.79999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071662946025224630, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071662946025224630, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6071662946025224630, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 6071662946025224630, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071662946025224630, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7800232677226238140, guid: e6fae192a215239489ac26a61c1ecf64, type: 3}
       propertyPath: Faction

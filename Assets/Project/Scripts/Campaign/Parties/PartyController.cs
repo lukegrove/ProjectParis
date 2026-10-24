@@ -9,19 +9,34 @@ namespace ProjectParis.Campaign.Parties
         [System.NonSerialized]
         public Party Party;
         private PartyMovement PartyMovement;
+        private PartySizeView PartySizeView;
         public Faction Faction;
+        public bool IsPlayer;
 
         void Awake()
         {
             Party = new Party();
+
+            Party.AddShipCorvette();
+            Party.AddShipDestroyer();
+            Party.AddShipDestroyer();
+
+            Party.Faction = Faction;
+
+            if (Faction == Faction.Faction1)
+            {
+                Party.AddShipCommand();
+            }
+            else
+            {
+                Party.AddShipCorvette();
+            }
+
             PartyMovement = GetComponent<PartyMovement>();
             PartyMovement.Initialize(Party);
 
-            Party.AddShip();
-            Party.AddShip();
-            Party.AddShip();
-
-            Party.Faction = Faction;
+            PartySizeView = GetComponentInChildren<PartySizeView>();
+            PartySizeView.Initialize(this);
         }
 
         public void OrderPartyToTarget(Vector3 destination)
@@ -37,11 +52,20 @@ namespace ProjectParis.Campaign.Parties
         public void RemoveShip(Ship ship)
         {
             Party.RemoveShip(ship);
+            if (PartySizeView != null)
+            {
+                PartySizeView.RefreshCount();
+            }
         }
 
         public int GetShipCount()
         {
             return Party.Ships.Count;
+        }
+
+        public Faction GetFaction()
+        {
+            return Party.Faction;
         }
     }
 }

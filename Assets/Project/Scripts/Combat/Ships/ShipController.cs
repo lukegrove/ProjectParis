@@ -1,5 +1,7 @@
 using UnityEngine;
 using ProjectParis.Combat.Battles;
+using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 
 public enum Faction
 {
@@ -16,7 +18,8 @@ namespace ProjectParis.Combat.Ships
     {
         private ShipMovement ShipMovement;
         private ShipScanner ShipScanner;
-        private ShipWeapon ShipWeapon;
+        //private ShipWeapon ShipWeapon;
+        private ShipWeapon[] ShipWeapons;
         private Ship Ship;
         public Faction Faction;
         private Faction EnemyFaction;
@@ -31,17 +34,25 @@ namespace ProjectParis.Combat.Ships
 
             ShipScanner = GetComponent<ShipScanner>();
 
-            ShipWeapon = GetComponent<ShipWeapon>();
+            ShipWeapons = GetComponents<ShipWeapon>();
         }
 
         public void Initialize(Ship ship, Faction faction, LayerMask targetLayer)
         {
             Ship = ship;
             Faction = faction;
+            ship.faction = Faction;
             TargetLayer = targetLayer;
             ShipMovement.Initialize(Ship, TargetLayer);
             ShipScanner.Initialize(Ship, TargetLayer);
-            ShipWeapon.Initialize(Ship, TargetLayer);
+
+            if (ship.WeaponLoadout.Count <= ship.WeaponLimit)
+            {
+                for (int i = 0; i < ship.WeaponLoadout.Count; i++)
+                {
+                    ShipWeapons[i].Initialize(ship.WeaponLoadout[i], TargetLayer);
+                }
+            }
 
             if (Faction == Faction.Faction1)
             {
@@ -68,19 +79,47 @@ namespace ProjectParis.Combat.Ships
             return ShipScanner.DetectEnemyShips(EnemyFaction);
         }
 
+        /*public ShipWeapon[] GetShipWeapons()
+        {
+            return ShipWeapons;
+        }*/
+
         public float GetWeaponRange()
         {
-            return ShipWeapon.range;
+            float weaponRange = 0f;
+            foreach (WeaponType weapon in Ship.WeaponLoadout)
+            {
+                weaponRange = Mathf.Max(weaponRange, weapon.Range);
+            }
+
+            return weaponRange;
         }
 
         public ShipController GetEnemyShipInRange()
         {
-            return ShipWeapon.DetectShipsInRange(EnemyFaction);
+            foreach (ShipWeapon weapon in ShipWeapons)
+            {
+                ShipController target = weapon.DetectShipsInRange(EnemyFaction);
+
+                if (target != null)
+                {
+                    return target;
+                }
+            }
+
+            return null;
         }
 
         public bool OrderShipToFire(ShipController target)
         {
-            return ShipWeapon.FireAtTarget(target);
+            bool hit = false;
+
+            foreach (ShipWeapon weapon in ShipWeapons)
+            {
+                hit = hit || weapon.FireAtTarget(target);
+            }
+
+            return hit;
         }
 
         public Faction GetEnemyFaction()
@@ -96,7 +135,6 @@ namespace ProjectParis.Combat.Ships
         public void TakeDamage(float damage)
         {
             Ship.TakeDamage(damage);
-            //Debug.Log($"{name} took {damage} damage! Hull at {Ship.Hull}.");
 
             if (!Ship.IsAlive())
             {

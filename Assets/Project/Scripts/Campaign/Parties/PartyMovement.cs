@@ -5,11 +5,12 @@ namespace ProjectParis.Campaign.Parties
     public class PartyMovement : MonoBehaviour
     {
         private Party Party;
-        public float Speed = 10f;
+        public float Speed;
 
         public void Initialize(Party party)
         {
             Party = party;
+            Speed = 1 + party.Ships.Count;
         }
 
         private void Update()
@@ -54,7 +55,7 @@ namespace ProjectParis.Campaign.Parties
             if (directionToTarget.sqrMagnitude > 0.0001f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(directionToTarget.normalized, Vector3.up);
-                shipTransform.rotation = Quaternion.Slerp(shipTransform.rotation, targetRotation, deltaTime * 4f);
+                shipTransform.rotation = Quaternion.Slerp(shipTransform.rotation, targetRotation, deltaTime * 100f);
             }
 
             float speed = Mathf.MoveTowards(Speed, 10, 1 * deltaTime);

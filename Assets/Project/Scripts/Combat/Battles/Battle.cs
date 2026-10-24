@@ -5,11 +5,11 @@ namespace ProjectParis.Combat.Battles
 {
     public class Battle
     {
-        public List<ShipController> AllyShips = new(), EnemyShips = new();
+        public List<Ship> AllyShips = new(), EnemyShips = new();
         public List<Ship> AllyCasualties = new(), EnemyCasualties = new();
         public BattleState BattleState;
 
-        public void RegisterShip(ShipController ship)
+        public void RegisterShip(Ship ship)
         {
             if (ship == null)
             {
@@ -21,7 +21,7 @@ namespace ProjectParis.Combat.Battles
                 return;
             }
 
-            if (ship.GetFaction() == Faction.Faction1)
+            if (ship.faction == Faction.Faction1)
             {
                 AllyShips.Add(ship);
             }
@@ -31,7 +31,7 @@ namespace ProjectParis.Combat.Battles
             }
         }
 
-        public bool ReportLoss(ShipController ship)
+        public bool ReportLoss(Ship ship)
         {
             if (ship == null)
             {
@@ -43,14 +43,14 @@ namespace ProjectParis.Combat.Battles
                 return false;
             }
 
-            if (ship.Faction == Faction.Faction1)
+            if (ship.faction == Faction.Faction1)
             {
                 if (!AllyShips.Remove(ship))
                 {
                     return false;
                 }
 
-                AllyCasualties.Add(ship.GetShip());
+                AllyCasualties.Add(ship);
             }
             else
             {
@@ -59,7 +59,7 @@ namespace ProjectParis.Combat.Battles
                     return false;
                 }
 
-                EnemyCasualties.Add(ship.GetShip());
+                EnemyCasualties.Add(ship);
             }
 
             UpdateBattleState();

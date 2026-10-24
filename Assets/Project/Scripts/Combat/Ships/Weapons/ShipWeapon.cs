@@ -1,40 +1,34 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace ProjectParis.Combat.Ships
 {
     public class ShipWeapon : MonoBehaviour
     {
+        private WeaponType WeaponType;
         private LayerMask TargetLayer;
+        private float WeaponCooldown;
 
-        public float range = 5f;
-        public float fireRate = 1f;
-        public float cooldown = 0;
-        public float damage = 1;
-
-        private Ship Ship;
-
-        public void Initialize(Ship shipState, LayerMask targetLayer)
+        public void Initialize(WeaponType weaponType, LayerMask targetLayer)
         {
-            Ship = shipState;
+            WeaponType = weaponType;
             TargetLayer = targetLayer;
         }
 
         void Update()
         {
-            if (cooldown > 0)
+            if (WeaponCooldown > 0)
             {
-                cooldown -= Time.deltaTime;
+                WeaponCooldown -= Time.deltaTime;
             }
-            else if (cooldown < 0)
+            else if (WeaponCooldown < 0)
             {
-                cooldown = 0;
+                WeaponCooldown = 0;
             }
         }
 
         public ShipController DetectShipsInRange(Faction EnemyFaction)
         {
-            Collider[] enemyTargets = Physics.OverlapSphere(transform.position, range, TargetLayer);
+            Collider[] enemyTargets = Physics.OverlapSphere(transform.position, WeaponType.Range, TargetLayer);
             
             foreach (var target in enemyTargets)
             {
@@ -51,11 +45,13 @@ namespace ProjectParis.Combat.Ships
 
         public bool FireAtTarget(ShipController target)
         {
-            if (target != null && cooldown == 0)
+            float weaponDamage = WeaponType.Damage;
+
+            if (target != null && WeaponCooldown == 0)
             {
-                target.TakeDamage(damage);
-                Debug.Log($"{name} dealt {damage} to {target.name}.");
-                cooldown = 1 / fireRate;
+                target.TakeDamage(weaponDamage);
+                Debug.Log($"{name} dealt {weaponDamage} to {target.name}.");
+                WeaponCooldown = 1 / WeaponType.FireRate;
                 return true;
             }
 
